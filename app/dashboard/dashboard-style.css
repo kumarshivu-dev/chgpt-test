@@ -1,0 +1,13 @@
+.css-uhb5lp {
+  box-shadow: none !important;
+}
+
+.logout_ic {
+  width: 39px;
+}
+
+@media (max-width: 768px) {
+  .logout_ic {
+    width: 33.3px;
+  }
+}
