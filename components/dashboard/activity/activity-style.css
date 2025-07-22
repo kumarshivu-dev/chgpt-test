@@ -1,0 +1,179 @@
+.activity-pg-content {
+  width: 98%;
+  text-align: justify;
+}
+
+.act-table {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+  margin: 2px;
+  margin-top: 13px;
+}
+
+/* above css for import document data table  */
+
+.act-thead {
+  background: #f9f9f9;
+  border-width: 0.2px 0.2px 1px 0.2px;
+  border-style: solid;
+  border-color: #919191;
+  color: #303030;
+  font-weight: bold;
+}
+
+.act-thead-tr {
+  padding: 12px;
+}
+
+.act-thead-tr-td {
+  padding: 8.5px 7.5px;
+  white-space: nowrap;
+}
+
+.act-tbody-tr-td {
+  padding: 7px 6px;
+}
+
+/* .act-thead-tr-td {
+  /* padding: 7.5px 7.5px; */
+/* white-space: nowrap; */
+.act-tbody-tr {
+  border-bottom: 1px solid #dddddd;
+  background-color: white;
+}
+
+.act-tbody-tr:hover {
+  /* border-left: 2px solid #022149; */
+  background-color: #fdfbff;
+  padding: 0 15px;
+}
+
+.act-tbody-tr:nth-child(even) {
+  background-color: #fcfcfc;
+}
+
+.act-tbody .act-tbody-tr-td:nth-child(3) {
+  max-width: 350px;
+  word-wrap: break-word;
+  white-space: normal;
+  padding-right: 20px;
+}
+
+.act-table-pagination-container {
+  display: flex;
+  flex-direction: row;
+  height: 36px;
+  margin-top: 10px;
+}
+
+/* Row additional info  */
+.row-addition-info {
+  display: flex;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 6px -2px #00000063 inset;
+  padding: 5px 5px 5px 15px;
+}
+
+.status-close {
+  cursor: pointer;
+  padding-top: 7.5px;
+  color: #919191;
+}
+
+.status-close:hover {
+  color: #000;
+}
+
+.status-container {
+  padding: 10px 0px;
+  border-bottom: 1px solid #d5dbe5;
+}
+
+.status-time {
+  display: flex;
+}
+.status-text {
+  margin-left: 10px;
+  font-weight: bold;
+  color: #303030;
+}
+
+.vertical-line {
+  margin: 2.5px 0px;
+  border-left: 2px solid #d5dbe5; /* Change the color and thickness as needed */
+  height: 23px;
+  margin-left: 15px;
+}
+
+.act-pagination-tile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.act-pagination-btns {
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.io-btn {
+  color: white !important;
+}
+
+.io-btn:hover,
+.io-btn:hover .icon {
+  background-color: #d77900;
+  color: white;
+}
+
+.table-btnt {
+  margin-left: 6px;
+  margin-right: 6px;
+  text-transform: none;
+  border-radius: 5px;
+  background-color: #d77900;
+}
+.card-component {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 9999;
+}
+.name-component {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.start-date-comp {
+  margin-right: 30px;
+}
+.date-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+  .card-component {
+    position: fixed;
+    top: auto;
+    right: 0;
+    width: 90vw;
+    /* overflow-y: auto; */
+  }
+  .date-component {
+    display: block;
+    margin-top: 16px;
+  }
+  .start-date-comp {
+    margin-right: 0;
+  }
+}
+@media (max-width: 768px) {
+  .activity-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}

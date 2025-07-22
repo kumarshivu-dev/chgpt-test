@@ -1,0 +1,99 @@
+.dashboard-header {
+  background-color: #f1f1f1;
+  z-index: 100;
+  box-shadow: "none";
+}
+
+.linear-progress {
+  width: 100%;
+  position: absolute;
+  padding-left: 0px;
+}
+
+.container {
+  max-width: none !important;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #f9fafb;
+  border: 1px solid #c6c6c6;
+}
+
+.toolbar {
+  top: 0;
+  right: 14px;
+  min-height: 60px;
+}
+
+.access-name {
+  color: #163058;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.icons-box {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.icons {
+  height: 45px;
+  width: 45px;
+}
+
+.paid-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 0px;
+}
+
+.help-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 4px;
+}
+
+.menu-item {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.profile-link {
+  padding-left: 0px !important;
+}
+
+.profile-avatar {
+  background-color: #163058;
+  width: 37.5px;
+  height: 37.5px;
+  margin-top: -10px;
+  padding-left: -10px;
+}
+
+@media (min-width: 768px) {
+  .dashboard-header {
+    background-color: red;
+    z-index: 100;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  }
+
+  .toolbar {
+    right: 20px;
+  }
+
+  .access-name {
+    font-size: 18px;
+  }
+
+  .icons {
+    height: 50px;
+    width: 50px;
+  }
+
+  .profile-avatar {
+    width: 41.67px;
+    height: 41.67px;
+  }
+}

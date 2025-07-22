@@ -1,0 +1,17 @@
+
+@media (max-width: 768px) {
+    .web-link-class {
+        text-align: left;
+    }
+    .brand-details{
+        display: flex;
+    }
+    .org-details{
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+
+

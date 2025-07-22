@@ -1,0 +1,161 @@
+.hyper-pg-content {
+  width: 98%;
+  text-align: justify;
+}
+
+.hyper-table {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+  margin: 2px;
+  margin-top: 13px;
+}
+
+/* above css for import document data table  */
+
+.hyper-thead {
+  background: #f9f9f9;
+  border-width: 0.2px 0.2px 1px 0.2px;
+  border-style: solid;
+  border-color: #919191;
+  color: #303030;
+  font-weight: bold;
+}
+
+.hyper-thead-tr {
+  padding: 12px;
+}
+
+.hyper-thead-tr-td {
+  padding: 8.5px 7.5px;
+  white-space: nowrap;
+}
+
+.hyper-tbody-tr-td {
+  padding: 7px 6px;
+}
+
+/* .hyper-thead-tr-td {
+    /* padding: 7.5px 7.5px; */
+/* white-space: nowrap; */
+.hyper-tbody-tr {
+  border-bottom: 1px solid #dddddd;
+  background-color: white;
+}
+
+.hyper-tbody-tr:hover {
+  /* border-left: 2px solid #022149; */
+  background-color: #fdfbff;
+  padding: 0 15px;
+}
+
+.hyper-tbody-tr:nth-child(even) {
+  background-color: #fcfcfc;
+}
+
+.hyper-tbody .hyper-tbody-tr-td:nth-child(2) {
+  max-width: 150px;
+  word-wrap: break-word;
+  white-space: normal;
+  padding-right: 20px;
+
+  max-width: 200px;
+  word-wrap: break-word;
+  white-space: normal;
+  padding-right: 20px;
+}
+
+.act-table-pagination-container {
+  display: flex;
+  flex-direction: row;
+  height: 36px;
+  margin-top: 10px;
+}
+
+.status-time {
+  display: flex;
+}
+.status-text {
+  margin-left: 10px;
+  font-weight: bold;
+  color: #303030;
+}
+
+.vertical-line {
+  margin: 2.5px 0px;
+  border-left: 2px solid #d5dbe5; /* Change the color and thickness as needed */
+  height: 23px;
+  margin-left: 15px;
+}
+
+.hyper-pagination-tile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.hyper-pagination-btns {
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.io-btn {
+  color: white !important;
+}
+
+.io-btn:hover,
+.io-btn:hover .icon {
+  background-color: #d77900;
+  color: white;
+}
+
+.table-btnt {
+  margin-left: 6px;
+  margin-right: 6px;
+  text-transform: none;
+  border-radius: 5px;
+  background-color: #d77900;
+}
+.card-component {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 9999;
+}
+.name-component {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.start-date-comp {
+  margin-right: 30px;
+}
+.date-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+  .card-component {
+    position: fixed;
+    top: auto;
+    right: 0;
+    width: 90vw;
+    /* overflow-y: auto; */
+  }
+  .date-component {
+    display: block;
+    margin-top: 16px;
+  }
+  .start-date-comp {
+    margin-right: 0;
+  }
+}
+@media (max-width: 768px) {
+  .hyper-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}

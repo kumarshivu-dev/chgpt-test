@@ -1,0 +1,86 @@
+/* SubscriptionSelection.css */
+
+.subscription-dialog {
+    width: 380px;
+    height: auto;
+    max-width: 90%;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  
+  .subscription-dialog-title {
+    color: #c00011;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .subscription-dialog-content {
+    padding: 16px;
+  }
+  
+  .subscription-dialog-content-text {
+    color: #000000;
+    font-size: 0.9rem;
+  }
+  
+  .subscription-card {
+    padding: 5px;
+    border-width: 1px;
+    border-color: grey;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .subscription-card.selected {
+    border-width: 3px;
+    border-color: #022149; /* primary.main color */
+  }
+  
+  .subscription-card:hover {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    border-color: #022149; /* primary.main color */
+  }
+  
+  .subscription-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .subscription-card-title {
+    font-weight: bold;
+    color: #022149; /* primary color */
+  }
+  
+  .subscription-card-detail {
+    color: #757575; /* textSecondary color */
+  }
+  
+  .subscription-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  
+  .subscription-cancel-button {
+    border-radius: 8px;
+    border: 1px solid #ababab;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+  }
+  
+  .subscription-cancel-button:hover {
+    border: 1px solid #ababab;
+  }
+  
+  .subscription-confirm-button {
+    border-radius: 8px;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    color: white;
+  }
+  
+  .subscription-confirm-button.enabled {
+    background: #022149;
+  }
+  
