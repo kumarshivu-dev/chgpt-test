@@ -1,0 +1,684 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Content Generation API",
+        "version": "1.0.0",
+        "description": "API for generating content, SEO, and taxonomy data for products."
+    },
+    "servers": [
+        {
+            "url": "${NEXT_PUBLIC_DASHBOARD_BASE_URL}/feature"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Content",
+            "description": "Routes related to content generation, SEO, and taxonomy."
+        }
+    ],
+    "components": {
+        "schemas": {
+            "ContentRequestBody": {
+                "type": "object",
+                "properties": {
+                    "doContentGen": {
+                        "type": "boolean",
+                        "description": "Enable content generation"
+                    },
+                    "doSeo": {
+                        "type": "boolean",
+                        "description": "Enable SEO generation"
+                    },
+                    "doTaxonomy": {
+                        "type": "boolean",
+                        "description": "Enable taxonomy generation"
+                    },
+                    "useBrandVoice": {
+                        "type": "boolean",
+                        "description": "Enable brand voice usage"
+                    },
+                    "taxonomy": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of taxonomy tags: Display the hierarcy in descending order with separator '>'.\n e.g. Clothing > Women > Bottoms"
+                    },
+                    "excludeKeywords": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of keywords to exclude in content"
+                    },
+                    "seoKeywords": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of keywords to use for SEO"
+                    },
+                    "languages": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of languages to generate content in"
+                    },
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "description": "Product ID"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "Product name"
+                                },
+                                "brand": {
+                                    "type": "string",
+                                    "description": "Brand name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "Product description"
+                                },
+                                "bulletPoints": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Input bullet points for the product"
+                                },
+                                "maxBullets": {
+                                    "type": "integer",
+                                    "description": "Maximum number of bullet points need to be generated"
+                                },
+                                "maxDescriptionLength": {
+                                    "type": "integer",
+                                    "description": "Maximum number of characters in the product description"
+                                },
+                                "productKeywords": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "List of keywords/phrases defining the product key details."
+                                },
+                                "seoKeywords": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "SEO keywords to incorporate in content."
+                                },
+                                "overrideTaxonomy": {
+                                    "type": "boolean",
+                                    "description": "Set it True if want to override the passed taxonomy in request body."
+                                },
+                                "taxonomy": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "List of taxonomy tags: Display the hierarcy in ascending order with seprator '>'"
+                                }
+                            }
+                        }
+                    },
+                    "personas": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of personas"
+                    }
+                },
+                "example": {
+                    "doContentGen": true,
+                    "doSeo": false,
+                    "doTaxonomy": false,
+                    "useBrandVoice": false,
+                    "taxonomy": ["Home > Electronics > Cameras"],
+                    "excludeKeywords": [ "kill", "harm", "destroy"],
+                    "languages":["English (US)", "English (UK)"],
+                    "products": [
+                        {
+                            "id": 123,
+                            "name": "Wyze cam",
+                            "brand": "WYZE",
+                            "description": "A smart security camera",
+                            "bulletPoints": []
+                        }
+                    ],
+                    "personas": []
+                }
+            },
+            "ResponseBody": {
+                "type": "object",
+                "properties": {
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "bullet_points": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Generated or SEO enhanced bullet points"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "Generated or SEO enhanced product description"
+                                },
+                                "exclude_keywords": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "List of excluded keywords"
+                                },
+                                "input_brand": {
+                                    "type": "string",
+                                    "description": "Brand used as input"
+                                },
+                                "input_keywords": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Keywords used as input"
+                                },
+                                "input_product_description": {
+                                    "type": "string",
+                                    "description": "Product description used as input"
+                                },
+                                "language": {
+                                    "type": "string",
+                                    "description": "Language of the generated content"
+                                },
+                                "persona": {
+                                    "type": "string",
+                                    "description": "Persona used for content generation"
+                                },
+                                "product_bullets": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Bullet points generated for the product"
+                                },
+                                "product_keywords": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Keywords generated for the product"
+                                },
+                                "product_name": {
+                                    "type": "string",
+                                    "description": "Product name"
+                                }
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "products": [
+                        {
+                            "bullet_points": [
+                                "Crystal clear 1080p HD video quality for sharp and detailed footage",
+                                "Two-way audio allows for easy communication with loved ones or pets",
+                                "Night vision capability ensures round-the-clock monitoring and security",
+                                "Motion detection alerts sent straight to your phone for real-time updates",
+                                "Free cloud storage for saving and reviewing footage anytime, anywhere"
+                            ],
+                            "description": "The Wyze Cam is a compact smart home security camera that offers crystal-clear 1080p HD video quality, night vision, and two-way audio communication for ultimate peace of mind. With motion and sound detection alerts, you can always stay informed about what's happening at home, even when you're away. Enjoy free cloud storage for added convenience and stay connected and protected with the Wyze Cam.",
+                            "exclude_keywords": "",
+                            "input_brand": "WYZE",
+                            "input_keywords": [],
+                            "input_product_description": "",
+                            "language": "English",
+                            "persona": "Default",
+                            "product_bullets": [],
+                            "product_keywords": [
+                                "fast",
+                                "long-capture"
+                            ],
+                            "product_name": "Wyze cam"
+                        }
+                    ]
+                }
+            },
+            "ComplianceRequestBody": {
+                "type": "object",
+                "properties": {
+                    "products": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "description": "Product ID"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "Product name"
+                                },
+                                "brand": {
+                                    "type": "string",
+                                    "description": "Brand name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "Product description"
+                                }
+                            }
+                        },
+                        "description": "Products input to test the compliance."
+                    },
+                    "useComplianceConfig": {
+                        "type": "boolean",
+                        "description": "Enable True to use compliance config from contenthubgpt dashboard."
+                    },
+                    "brandVoiceCompliance": {
+                        "type": "boolean",
+                        "description": "Enable true to check brand voice compliance on passed products."
+                    }
+                },
+                "example": {}
+            }
+        }
+    },
+    "paths": {
+        "/content/generation": {
+            "post": {
+                "tags": [
+                    "Content"
+                ],
+                "summary": "Generate content for a product",
+                "description": "This endpoint allows you to generate content for a product based on the provided input. It takes product details such as brand, name, and description, and can generate content such as SEO descriptions, product bullet points, and more. You can enable/disable different features like content generation, SEO, and taxonomy by setting the respective flags in the request body.",
+                "operationId": "generateContent",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContentRequestBody"
+                            },
+                            "example": {
+                                "doContentGen": true,
+                                "doSeo": false,
+                                "doTaxonomy": false,
+                                "useBrandVoice": false,
+                                "taxonomy": [],
+                                "excludeKeywords": [],
+                                "products": [
+                                    {
+                                        "id": 123,
+                                        "name": "Wyze cam",
+                                        "brand": "WYZE",
+                                        "description": "A smart security camera",
+                                        "bulletPoints": []
+                                    }
+                                ],
+                                "personas": []
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful content generation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseBody"
+                                },
+                                "example": {
+                                    "products": [
+                                        {
+                                            "bullet_points": [
+                                                "Crystal clear 1080p HD video quality for sharp and detailed footage",
+                                                "Two-way audio allows for easy communication with loved ones or pets",
+                                                "Night vision capability ensures round-the-clock monitoring and security",
+                                                "Motion detection alerts sent straight to your phone for real-time updates",
+                                                "Free cloud storage for saving and reviewing footage anytime, anywhere"
+                                            ],
+                                            "description": "The Wyze Cam is a compact smart home security camera that offers crystal-clear 1080p HD video quality, night vision, and two-way audio communication for ultimate peace of mind. With motion and sound detection alerts, you can always stay informed about what's happening at home, even when you're away. Enjoy free cloud storage for added convenience and stay connected and protected with the Wyze Cam.",
+                                            "exclude_keywords": "",
+                                            "input_brand": "WYZE",
+                                            "input_keywords": [],
+                                            "input_product_description": "",
+                                            "language": "English",
+                                            "persona": "Default",
+                                            "product_bullets": [],
+                                            "product_keywords": [
+                                                "fast",
+                                                "long-capture"
+                                            ],
+                                            "product_name": "Wyze cam"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "header",
+                        "required": true,
+                        "description": "API version",
+                        "schema": {
+                            "type": "string",
+                            "example": "1.0.0"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": true,
+                        "description": "API key for authentication",
+                        "schema": {
+                            "type": "string",
+                            "example": "your_api_key_here"
+                        }
+                    },
+                    {
+                        "name": "x-client-id",
+                        "in": "header",
+                        "required": true,
+                        "description": "Client identifier",
+                        "schema": {
+                            "type": "string",
+                            "example": "your_client_id_here"
+                        }
+                    }
+                ]
+            }
+        },
+        "test/connectivity": {
+            "get": {
+                "tags": [
+                    "Test Connectivity"
+                ],
+                "summary": "Test connectivity",
+                "description": "This endpoint allows you to test the connectivity to the API service. It returns a simple success message if the connection is successful.",
+                "operationId": "testConnectivity",
+                "responses": {
+                    "200": {
+                        "description": "Connection successful",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Connection successful"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "header",
+                        "required": true,
+                        "description": "API version",
+                        "schema": {
+                            "type": "string",
+                            "example": "1.0.0"
+                        }
+                    },
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "required": true,
+                        "description": "API key for authentication",
+                        "schema": {
+                            "type": "string",
+                            "example": "your_api_key_here"
+                        }
+                    },
+                    {
+                        "name": "X-client-id",
+                        "in": "header",
+                        "required": true,
+                        "description": "Client identifier",
+                        "schema": {
+                            "type": "string",
+                            "example": "your_client_id_here"
+                        }
+                    }
+                ]
+            }
+        },
+        "/suggest/seo": {
+            "get": {
+                "tags": [
+                    "Content"
+                ],
+                "summary": "SEO Keywords suggestions",
+                "description": "This endpoint helps you identify SEO keywords tailored to your products by analyzing your brand's website.",
+                "operationId": "getSeoKeywords",
+                "parameters": [
+                    {
+                    "name": "websiteUrl",
+                    "in": "query",
+                    "required": true,
+                    "description": "Company or Brand URL to identify the Keywords",
+                    "schema": {
+                        "type": "string",
+                        "example": "https://www.gspann.com"
+                    }
+                    },
+                    {
+                    "name": "version",
+                    "in": "header",
+                    "required": true,
+                    "description": "API version",
+                    "schema": {
+                        "type": "string",
+                        "example": "1.0.0"
+                    }
+                    },
+                    {
+                    "name": "x-api-key",
+                    "in": "header",
+                    "required": true,
+                    "description": "API key for authentication",
+                    "schema": {
+                        "type": "string",
+                        "example": "your_api_key_here"
+                    }
+                    },
+                    {
+                    "name": "x-client-id",
+                    "in": "header",
+                    "required": true,
+                    "description": "Client identifier",
+                    "schema": {
+                        "type": "string",
+                        "example": "your_client_id_here"
+                    }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful keywords figured out from company/brand URL.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "config": {
+                                            "type": "object",
+                                            "properties": {
+                                                "language_id": { "type": "string" },
+                                                "location_ids": {
+                                                    "type": "array",
+                                                    "items": { "type": "integer" }
+                                                },
+                                                "page_url": { "type": "string" },
+                                                "product_name": { "type": "string" }
+                                            }
+                                        },
+                                        "keyword_results": {
+                                            "type": "array",
+                                            "description": "List of found keywords which suit the brand.",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "avg_monthly_searches": { "type": "integer" },
+                                                    "competition": { "type": "string" },
+                                                    "keyword_text": { "type": "string" },
+                                                    "language": { "type": "string" }
+                                                }
+                                            }
+                                        },
+                                        "language": { "type": "string" },
+                                        "total_keywords_found": { "type": "integer" }
+                                    }
+                                },
+                                "example": {
+                                    "config": {
+                                        "language_id": "1000",
+                                        "location_ids": [2840],
+                                        "page_url": "https://www.gspann.com",
+                                        "product_name": ""
+                                    },
+                                    "keyword_results": [
+                                        {
+                                            "avg_monthly_searches": 50,
+                                            "competition": "HIGH",
+                                            "keyword_text": "consulting platform as a service",
+                                            "language": "english"
+                                        },
+                                        {
+                                            "avg_monthly_searches": 30,
+                                            "competition": "HIGH",
+                                            "keyword_text": "consulting practice management software",
+                                            "language": "english"
+                                        },
+                                        {
+                                            "avg_monthly_searches": 20,
+                                            "competition": "HIGH",
+                                            "keyword_text": "build consulting website",
+                                            "language": "english"
+                                        },
+                                        {
+                                            "avg_monthly_searches": 20,
+                                            "competition": "HIGH",
+                                            "keyword_text": "customer service consulting business",
+                                            "language": "english"
+                                        },
+                                        {
+                                            "avg_monthly_searches": 20,
+                                            "competition": "HIGH",
+                                            "keyword_text": "starting a sales consulting business",
+                                            "language": "english"
+                                        }
+                                    ],
+                                    "language": "english",
+                                    "total_keywords_found": 1499
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/compliance": {
+            "post": {
+                "tags": [
+                    "Content"
+                ],
+                "summary": "Check product content compliance",
+                "description": "This endpoint allows you to check the compliance of products based on the provided input. It takes product details such as brand, name, and description, and checks for compliance using the specified configurations.",
+                "operationId": "checkCompliance",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ComplianceRequestBody"
+                            },
+                            "example": {
+                                "products": [
+                                    {
+                                        "id": 123,
+                                        "name": "Wyze cam",
+                                        "brand": "WYZE",
+                                        "description": "A smart security camera"
+                                    }
+                                ],
+                                "useComplianceConfig": true,
+                                "brandVoiceCompliance": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Compliance check successful",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Compliance check successful",
+                                    "complianceResults": []
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "version",
+                        "in": "header",
+                        "required": true,
+                        "description": "API version",
+                        "schema": {
+                            "type": "string",
+                            "example": "1.0.0"
+                        }
+                    },
+                    {
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": true,
+                        "description": "API key for authentication",
+                        "schema": {
+                            "type": "string",
+                            "example": "your_api_key_here"
+                        }
+                    },
+                    {
+                        "name": "x-client-id",
+                        "in": "header",
+                        "required": true,
+                        "description": "Client identifier",
+                        "schema": {
+                            "type": "string",
+                            "example": "your_client_id_here"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
